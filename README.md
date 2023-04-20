@@ -1,7 +1,7 @@
 # lol_times_api
 
 by wangsipni_pizza_thief
-
+2023-04-19: Kick Off
 
 ## 프로젝트 소개
 
