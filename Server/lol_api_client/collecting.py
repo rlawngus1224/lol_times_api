@@ -9,14 +9,23 @@ request_headers = {
     "Accept-Language": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",
     "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
     "Origin": "https://developer.riotgames.com",
-    "X-Riot-Token": "RGAPI-a8d6475f-6a89-4413-963b-8d49ac4b451f"
+    "X-Riot-Token": "RGAPI-2073a19a-f4c6-4298-96bc-0d0a07d3956c"
 }
 
-my_name = '너구리아빠주혀니'
+my_name = '너구리야지면안돼'
 def check_summoner_info_by_name():
     summoner_info = requests.get("https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + my_name, headers=request_headers).json()
     json.dumps(summoner_info, ensure_ascii=False).encode('utf8')
-    print (summoner_info)
+    # print (summoner_info)
+    puuid = summoner_info["puuid"]
+    # print(puuid)
+    match_info = requests.get("https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/"+puuid+"/ids?start=0&count=100", headers=request_headers).json()
+    # print(match_info)
+    pre_match_id = match_info[0] #일단 직전 경기만 한번 해보자
+    # print(pre_match_data)
+    match_data = requests.get("https://asia.api.riotgames.com/lol/match/v5/matches/"+pre_match_id,headers=request_headers).json()
+    print(match_data)
+
 
 check_summoner_info_by_name()
 
